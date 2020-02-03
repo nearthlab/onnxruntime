@@ -336,6 +336,7 @@ add_dependencies(onnxruntime_test_utils ${onnxruntime_EXTERNAL_DEPENDENCIES})
 target_include_directories(onnxruntime_test_utils PUBLIC "${TEST_SRC_DIR}/util/include" PRIVATE ${eigen_INCLUDE_DIRS} ${ONNXRUNTIME_ROOT})
 set_target_properties(onnxruntime_test_utils PROPERTIES FOLDER "ONNXRuntimeTest")
 
+if (FALSE)
 if (SingleUnitTestProject)
   set(all_tests ${onnxruntime_test_common_src} ${onnxruntime_test_ir_src} ${onnxruntime_test_optimizer_src} ${onnxruntime_test_framework_src} ${onnxruntime_test_providers_src})
   set(all_dependencies ${onnxruntime_test_providers_dependencies} )
@@ -416,17 +417,19 @@ else()
 
   set(test_data_target onnxruntime_test_ir)
 endif()  # SingleUnitTestProject
+endif()  # FALSE
 
 # standalone test for inference session without environment
 # the normal test executables set up a default runtime environment, which we don't want here
 AddTest(
-  TARGET onnxruntime_test_framework_session_without_environment_standalone
+  # TARGET onnxruntime_test_framework_session_without_environment_standalone
+  TARGET onnxruntime_test_all
   SOURCES "${TEST_SRC_DIR}/framework/inference_session_without_environment/inference_session_without_environment_standalone_test.cc" "${TEST_SRC_DIR}/framework/test_main.cc"
   LIBS  onnxruntime_test_utils ${ONNXRUNTIME_TEST_LIBS}
   DEPENDS ${onnxruntime_EXTERNAL_DEPENDENCIES}
 )
 
-
+if(FALSE)
 #
 # onnxruntime_ir_graph test data
 #
@@ -478,6 +481,7 @@ if(WIN32)
       )
   endif()
 endif()
+endif() # FALSE
 
 add_library(onnx_test_data_proto ${TEST_SRC_DIR}/proto/tml.proto)
 if(WIN32)
@@ -584,6 +588,7 @@ add_test(NAME onnx_test_pytorch_converted
 add_test(NAME onnx_test_pytorch_operator
   COMMAND onnx_test_runner ${PROJECT_SOURCE_DIR}/external/onnx/onnx/backend/test/data/pytorch-operator)
 
+if (FALSE)
 #perf test runner
 set(onnxruntime_perf_test_src_dir ${TEST_SRC_DIR}/perftest)
 set(onnxruntime_perf_test_src_patterns
@@ -641,6 +646,7 @@ if (onnxruntime_USE_TVM)
     target_link_options(onnxruntime_perf_test PRIVATE "/STACK:4000000")
   endif()
 endif()
+endif() # FALSE
 
 # Opaque API test can not be a part of the shared lib tests since it is using
 # C++ internals apis to register custom type, kernel and schema. It also can not

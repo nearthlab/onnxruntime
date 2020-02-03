@@ -31,6 +31,7 @@ class CPUExecutionProvider : public IExecutionProvider {
                                                 [](int) { return onnxruntime::make_unique<TAllocator>(); },
                                                 std::numeric_limits<size_t>::max()};
 
+    (void)(info);
 #ifdef USE_JEMALLOC
 #if defined(USE_MIMALLOC)
 #error jemalloc and mimalloc should not both be enabled

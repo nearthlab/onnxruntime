@@ -284,7 +284,7 @@ def generate_build_tree(cmake_path, source_dir, build_dir, cuda_home, cudnn_home
     # for now, disable jemalloc if pybind is also enabled.
     cmake_args = [cmake_path, cmake_dir,
                  "-Donnxruntime_RUN_ONNX_TESTS=" + ("ON" if args.enable_onnx_tests else "OFF"),
-                 "-Donnxruntime_GENERATE_TEST_REPORTS=ON",
+                 "-Donnxruntime_GENERATE_TEST_REPORTS=OFF",
                  "-Donnxruntime_DEV_MODE=" + ("OFF" if args.android else "ON"),
                  "-DPYTHON_EXECUTABLE=" + sys.executable,
                  "-Donnxruntime_USE_CUDA=" + ("ON" if args.use_cuda else "OFF"),

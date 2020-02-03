@@ -147,12 +147,16 @@ file(GLOB onnxruntime_python_datasets_data CONFIGURE_DEPENDS
     "${ONNXRUNTIME_ROOT}/python/datasets/*.onnx"
 )
 
+if (FALSE)
 # adjust based on what target/s onnxruntime_unittests.cmake created
 if (SingleUnitTestProject)
   set(test_data_target onnxruntime_test_all)
 else()
   set(test_data_target onnxruntime_test_ir)
 endif()
+endif()  # FALSE
+
+set(test_data_target onnxruntime_test_all)
 
 add_custom_command(
   TARGET onnxruntime_pybind11_state POST_BUILD

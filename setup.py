@@ -9,6 +9,7 @@ from distutils.command.build_ext import build_ext as _build_ext
 from glob import glob
 from os import path, getcwd, environ, remove
 from shutil import copyfile
+import os
 import platform
 import subprocess
 import sys
@@ -178,7 +179,7 @@ with open(README) as f:
 
 
 version_number = ''
-with open('VERSION_NUMBER') as f:
+with open(os.path.join(os.path.split(__file__)[0], 'VERSION_NUMBER')) as f:
     version_number = f.readline().strip()
 if nightly_build:
     #https://docs.microsoft.com/en-us/azure/devops/pipelines/build/variables
